@@ -1,0 +1,8 @@
+THEMES:
+
+https://wiki.tcl-lang.org/page/Changing+Widget+Colors
+
+https://anzeljg.github.io/rin2/book2/2405/docs/tkinter/ttk-style-layer.html
+
+https://anzeljg.github.io/rin2/book2/2405/docs/tkinter/ttk-map.html
+
