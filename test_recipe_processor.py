@@ -2,7 +2,6 @@ import recipe_processor
 import unittest
 from xml.etree import ElementTree
 import datetime
-from collections import OrderedDict
 
 
 class Test(unittest.TestCase):

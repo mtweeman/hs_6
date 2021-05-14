@@ -1,7 +1,6 @@
 import dict_recipe_extractor
 import unittest
 import datetime
-from collections import OrderedDict
 
 
 class Test(unittest.TestCase):
@@ -39,16 +38,16 @@ class Test(unittest.TestCase):
         self.mash_steps_result = [{'NAME': 'Mash In', 'STEP_TIME': datetime.timedelta(seconds=0), 'STEP_TEMP': 55},
                                   {'NAME': 'Mash Out', 'STEP_TIME': datetime.timedelta(seconds=1800), 'STEP_TEMP': 75}]
         self.mash_steps_additional_result = 'Lupulus Mash'
-        self.parameters_result = OrderedDict(
-            [('GRAIN_TEMP', 22.2), ('WATER_GRAIN_RATIO', 2.6), ('INFUSE_VOLUME', 13.36), ('INFUSE_TEMP', 59.8),
-             ('MLT_DEADSPACE_VOLUME', 9.24), ('SPARGE_VOLUME', 20.81), ('BOIL_VOLUME', 20.81), ('PRE_BOIL_OG', 1.046),
-             ('BOIL_TIME', datetime.timedelta(seconds=3600)), ('TRUB_CHILLER_VOLUME', 5.0),
-             ('COOLING_SHRINKAGE_PERCENTAGE', 4.0), ('EVAPORATION_PERCENTAGE', 2.4), ('POST_BOIL_VOLUME', 20.31),
-             ('KNOCKOUT_VOLUME', 19.5), ('BATCH_VOLUME', 14.5), ('FERMENTATION_TEMP', 20.0), ('OG', 1.049),
-             ('IBU', 38.2), ('RECIPE_NAME', '#079 Session IPA'), ('BATCH_NUMBER', 79), ('BATCH_NAME', 'Session IPA')])
+        self.parameters_result = {
+            'GRAIN_TEMP': 22.2, 'WATER_GRAIN_RATIO': 2.6, 'INFUSE_VOLUME': 13.36, 'INFUSE_TEMP': 59.8,
+            'MLT_DEADSPACE_VOLUME': 9.24, 'SPARGE_VOLUME': 20.81, 'BOIL_VOLUME': 20.81, 'PRE_BOIL_OG': 1.046,
+            'BOIL_TIME': datetime.timedelta(seconds=3600), 'TRUB_CHILLER_VOLUME': 5.0,
+            'COOLING_SHRINKAGE_PERCENTAGE': 4.0, 'EVAPORATION_PERCENTAGE': 2.4, 'POST_BOIL_VOLUME': 20.31,
+            'KNOCKOUT_VOLUME': 19.5, 'BATCH_VOLUME': 14.5, 'FERMENTATION_TEMP': 20.0, 'OG': 1.049,
+            'IBU': 38.2, 'RECIPE_NAME': '#079 Session IPA', 'BATCH_NUMBER': 79, 'BATCH_NAME': 'Session IPA'}
         self.parameters_additional_result = 'HS_3'
-        self.recipe_name_result = []
-        self.recipe_name_additional_result = '#079 Session IPA'
+        self.user_settings_result = []
+        self.user_settings_additional_result = '#079 Session IPA'
 
     def test_hops_extract(self):
         self.hops_extractor.extract()
@@ -77,8 +76,8 @@ class Test(unittest.TestCase):
 
     def test_recipe_name(self):
         self.recipe_name_extractor.extract()
-        self.assertEqual(self.recipe_name_extractor.get_extracted_records(), self.recipe_name_result)
-        self.assertEqual(self.recipe_name_extractor.get_additional_parameter(), self.recipe_name_additional_result)
+        self.assertEqual(self.recipe_name_extractor.get_extracted_records(), self.user_settings_result)
+        self.assertEqual(self.recipe_name_extractor.get_additional_parameter(), self.user_settings_additional_result)
 
 
 unittest.main()

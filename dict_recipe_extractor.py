@@ -1,5 +1,4 @@
 import datetime
-from collections import OrderedDict
 import xml_list_config
 from abc import ABC, abstractmethod
 
@@ -135,7 +134,7 @@ class FermentablesExtractor(DictRecipeExtractor):
         for record in self._extracted_records:
             fermentables_weight += record['AMOUNT']
 
-        self._additional_parameter = fermentables_weight
+        self._additional_parameter = round(fermentables_weight, 2)
 
 
 class MashStepsExtractor(DictRecipeExtractor):
@@ -162,7 +161,7 @@ class MashStepsExtractor(DictRecipeExtractor):
 class ParametersExtractor(DictRecipeExtractor):
     def __init__(self, recipe_dict):
         DictRecipeExtractor.__init__(self, recipe_dict)
-        self._extracted_records = OrderedDict()
+        self._extracted_records = {}
         self._category = 'PARAMETERS'
         self._entries = 'PARAMETER'
 
@@ -213,8 +212,8 @@ class ParametersExtractor(DictRecipeExtractor):
 class RecipeNameExtractor(DictRecipeExtractor):
     def __init__(self, recipe_dict):
         DictRecipeExtractor.__init__(self, recipe_dict)
-        self._category = 'RECIPE_NAME'
-        self._entries = 'RECIPE_NAME'
+        self._category = 'USER_SETTINGS'
+        self._entries = 'USER_SETTINGS'
 
     def extract(self):
         self._calculate_additional_parameter()
