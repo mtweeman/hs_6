@@ -192,7 +192,6 @@ class ParametersExtractor(DictRecipeExtractor):
         self._extracted_records['FERMENTATION_TEMP'] = round(float(self._recipe['PRIMARY_TEMP']), 1)
         self._extracted_records['OG'] = round(float(self._recipe['EST_OG'].split()[0]), 3)
         self._extracted_records['IBU'] = round(float(self._recipe['IBU'].split()[0]), 1)
-        self._extracted_records['RECIPE_NAME'] = self._recipe['NAME']
         self._extracted_records['BATCH_NUMBER'] = int(self._recipe['NAME'].split()[0][1:])
         self._extracted_records['BATCH_NAME'] = self._recipe['NAME'].strip(self._recipe['NAME'].split()[0] + ' ')
 

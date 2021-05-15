@@ -44,7 +44,7 @@ class Test(unittest.TestCase):
             'BOIL_TIME': datetime.timedelta(seconds=3600), 'TRUB_CHILLER_VOLUME': 5.0,
             'COOLING_SHRINKAGE_PERCENTAGE': 4.0, 'EVAPORATION_PERCENTAGE': 2.4, 'POST_BOIL_VOLUME': 20.31,
             'KNOCKOUT_VOLUME': 19.5, 'BATCH_VOLUME': 14.5, 'FERMENTATION_TEMP': 20.0, 'OG': 1.049,
-            'IBU': 38.2, 'RECIPE_NAME': '#079 Session IPA', 'BATCH_NUMBER': 79, 'BATCH_NAME': 'Session IPA'}
+            'IBU': 38.2, 'BATCH_NUMBER': 79, 'BATCH_NAME': 'Session IPA'}
         self.parameters_additional_result = 'HS_3'
         self.user_settings_result = []
         self.user_settings_additional_result = '#079 Session IPA'

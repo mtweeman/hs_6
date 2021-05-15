@@ -20,7 +20,7 @@ class Test(unittest.TestCase):
 
     def set_test_expected_results(self):
         recipe_path = r'test/xml_recipe_processor_result.txt'
-        with open(recipe_path, 'r', encoding='utf-8') as xml_recipe_result:
+        with open(recipe_path, 'rb') as xml_recipe_result:
             self.recipe_result = eval(xml_recipe_result.read())
 
     def test_import_file(self):
