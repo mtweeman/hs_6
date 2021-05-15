@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
-from xml_list_config import XmlDictConfig
 from dict_recipe_extractor import DictRecipeExtractor
+import xmltodict
 
 
 class RecipeProcessor(ABC):
@@ -29,8 +29,8 @@ class XMLRecipeProcessor(RecipeProcessor):
         return self.__additional_parameters
 
     def __create_dict(self, xml):
-        self.__recipe_dict = XmlDictConfig(xml)
-        self.__recipe_dict = self.__recipe_dict['RECIPE']
+        xml = xmltodict.parse(xml)
+        self.__recipe_dict = xml['RECIPES']['RECIPE']
 
     def __create_extractors_for_categories(self):
         for subclass in DictRecipeExtractor.__subclasses__():

@@ -1,7 +1,5 @@
 import threading
 import hashlib
-import xml.etree.ElementTree
-import xml.etree.ElementTree as element_tree
 
 
 class RecipeMonitor(threading.Thread):
@@ -29,7 +27,7 @@ class RecipeMonitor(threading.Thread):
             if new_md5 != self.__previous_md5:
                 self.__previous_md5 = new_md5
 
-                self.__process_file()
+                self.__process_file(imported_recipe)
 
     def __open_recipe_file(self):
         try:
@@ -44,21 +42,12 @@ class RecipeMonitor(threading.Thread):
         md5 = hashlib.md5(imported_recipe).hexdigest()
         return md5
 
-    def __process_file(self):
-        root = self.__get_tree_root()
+    def __process_file(self, imported_recipe):
+        self.__recipe_processor.import_file(imported_recipe)
+        recipe = self.__recipe_processor.get_recipe()
+        additional_parameters = self.__recipe_processor.get_additional_parameters()
 
-        if root:
-            self.__recipe_processor.import_file(root)
-            recipe = self.__recipe_processor.get_recipe()
-            additional_parameters = self.__recipe_processor.get_additional_parameters()
-            self.__queue.put(recipe)
-            self.__queue.put(additional_parameters)
-            self.__gui_element.event_generate('<<processed_recipe>>')
+        self.__queue.put(recipe)
+        self.__queue.put(additional_parameters)
 
-    def __get_tree_root(self):
-        try:
-            root = element_tree.parse(self.__recipe_path).getroot()
-        except xml.etree.ElementTree.ParseError:
-            pass
-        else:
-            return root
+        self.__gui_element.event_generate('<<processed_recipe>>')

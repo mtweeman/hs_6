@@ -1,6 +1,5 @@
 import recipe_processor
 import unittest
-from xml.etree import ElementTree
 import datetime
 
 
@@ -12,7 +11,9 @@ class Test(unittest.TestCase):
 
     def set_testing_arguments(self):
         xml_recipe_path = r'test/xml_recipe_processor.xml'
-        self.test_recipe = ElementTree.parse(xml_recipe_path).getroot()
+
+        with open(xml_recipe_path, 'rb') as xml_recipe:
+            self.test_recipe = xml_recipe.read()
 
     def set_tested_objects(self):
         self.xml_recipe = recipe_processor.XMLRecipeProcessor()

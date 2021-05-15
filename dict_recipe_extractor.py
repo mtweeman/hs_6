@@ -1,5 +1,4 @@
 import datetime
-import xml_list_config
 from abc import ABC, abstractmethod
 
 
@@ -38,9 +37,7 @@ class DictRecipeExtractor(ABC):
             return True
 
     def __check_entry_quantity(self, category, entry):
-        dictionary = isinstance(self._recipe[category][entry], dict)
-        xml_dictionary = isinstance(self._recipe[category][entry], xml_list_config.XmlDictConfig)
-        single_entry = dictionary or xml_dictionary
+        single_entry = isinstance(self._recipe[category][entry], dict)
         return single_entry
 
     def __convert_single_entry_to_list(self, category, entry):
@@ -197,8 +194,7 @@ class ParametersExtractor(DictRecipeExtractor):
         self._extracted_records['IBU'] = round(float(self._recipe['IBU'].split()[0]), 1)
         self._extracted_records['RECIPE_NAME'] = self._recipe['NAME']
         self._extracted_records['BATCH_NUMBER'] = int(self._recipe['NAME'].split()[0][1:])
-        self._extracted_records['BATCH_NAME'] = self._recipe['NAME'].strip(
-            self._recipe['NAME'].split()[0] + ' ')
+        self._extracted_records['BATCH_NAME'] = self._recipe['NAME'].strip(self._recipe['NAME'].split()[0] + ' ')
 
         self._calculate_additional_parameter()
 
